@@ -28,10 +28,26 @@ services:
   #     - ./frontend:/home/node/app
   #   ports:
   #     - "8080:8080"
-  test-reat:
-    build: ./test-reat
-    # 연결할 외부 디렉토리 : 컨테이너 내 디렉토리
-    volumes:
-      - ./test-reat/build:/home/node/app/build
+  # test-reat:
+  #   build: ./test-reat
+  #   # 연결할 외부 디렉토리 : 컨테이너 내 디렉토리
+  #   volumes:
+  #     - ./test-reat/build:/home/node/app/build
+  #   ports:
+  #     - "3000:80"
+  spring-boot-nginx-test:
+    # Dockerfile이 있는 위치
+    build: ./spring-boot-nginx-test
+    # volumes:
+      # - ./spring-boot-nginx-test/build/libs:/home/node/app/build
     ports:
-      - "3000:80"
+      - "8080:8080"
+
+  nginx:
+     # Dockerfile이 있는 위치
+    build: ./nginx
+    ports:
+      - "80:80"
+    # depends_on은 설정 서비스 명이 spring-boot-nginx-test이 먼저 실행된 후, 실행하는 부분이다.
+    depends_on:
+      - spring-boot-nginx-test
