@@ -1,9 +1,9 @@
 # 지금 사용중인 이미지 이름
-FROM node:20.5.0
+FROM node:14.15.1-alpine3.12
 
 # 이미지 생성 과정에서 실행할 명령어
 # 이미지 생성 과정에서 npm 모듈을 설치가 된다.
-RUN npm install -g http-server 
+RUN npm install -g serve
 
 # 이미지 내에서 명령어를 실행할(현 위치로 잡을) 디렉토리 설정
 WORKDIR /home/node/app
@@ -11,7 +11,7 @@ WORKDIR /home/node/app
 # 컨테이너 실행시 실행할 명령어
 # WORKDIR에서 실행된다.
 # 실행하자마자 설정이 된다.
-CMD ["npm", "run", "start"]
+CMD ["serve", "-s", "build"]
 
 # 이미지 생성 명령어 (현 파일과 같은 디렉토리에서)
 # . 는 Dockerfile이 있는 경로이다.

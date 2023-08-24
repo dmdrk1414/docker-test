@@ -1,37 +1,37 @@
 version: '3'
 services:
-  database:
-    # Dockerfile이 있는 위치
-    build: ./database
-    # 내부에서 개방할 포트 : 외부에서 접근할 포트
-    ports:
-      - "3306:3306"
-  backend:
-    # Dockerfile이 있는 위치
-    build: ./backend
-    # (연결할 외부 디렉토리):(컨테이너 내 디렉토리)
-    # ./backend의 폴더를 컨테이너내부의 /usr/src/app으로 연결한다.
-    volumes:
-      - ./backend:/usr/src/app
-    ports:
-      - "5000:5000"
-    # command: sh -c "pip3 install flask flask-cors flask-mysql cryptography && python3 backend.py"
+  # database:
+  #   # Dockerfile이 있는 위치
+  #   build: ./database
+  #   # 내부에서 개방할 포트 : 외부에서 접근할 포트
+  #   ports:
+  #     - "3306:3306"
+  # backend:
+  #   # Dockerfile이 있는 위치
+  #   build: ./backend
+  #   # (연결할 외부 디렉토리):(컨테이너 내 디렉토리)
+  #   # ./backend의 폴더를 컨테이너내부의 /usr/src/app으로 연결한다.
+  #   volumes:
+  #     - ./backend:/usr/src/app
+  #   ports:
+  #     - "5000:5000"
+  #   # command: sh -c "pip3 install flask flask-cors flask-mysql cryptography && python3 backend.py"
 
-        # 환경변수 설정
-    environment: 
-    # database 서비스에 접속할때 이 호스트명을 이용해서 접속
-      - DBHOST=database
-  frontend:
-    build: ./frontend
-    # 연결할 외부 디렉토리 : 컨테이너 내 디렉토리
-    volumes:
-      - ./frontend:/home/node/app
-    ports:
-      - "8080:8080"
+  #       # 환경변수 설정
+  #   environment: 
+  #   # database 서비스에 접속할때 이 호스트명을 이용해서 접속
+  #     - DBHOST=database
+  # frontend:
+  #   build: ./frontend
+  #   # 연결할 외부 디렉토리 : 컨테이너 내 디렉토리
+  #   volumes:
+  #     - ./frontend:/home/node/app
+  #   ports:
+  #     - "8080:8080"
   test-reat:
     build: ./test-reat
     # 연결할 외부 디렉토리 : 컨테이너 내 디렉토리
     volumes:
-      - ./test-reat:/home/node/app
+      - ./test-reat/build:/home/node/app
     ports:
       - "3000:3000"
