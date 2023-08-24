@@ -32,6 +32,6 @@ services:
     build: ./test-reat
     # 연결할 외부 디렉토리 : 컨테이너 내 디렉토리
     volumes:
-      - ./test-reat/build:/home/node/app
+      - ./test-reat/build:/home/node/app/build
     ports:
-      - "3000:3000"
+      - "3000:80"
